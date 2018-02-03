@@ -1,8 +1,9 @@
 greeting = """
 <@{user}> {server}にいらっしゃい
-ここは18禁なサーバーですので、こちらで年齢確認します。あなたは18歳以上ですか？（「{yes}」と答えてください）"""
+ここは18禁なサーバーですので、こちらで年齢確認します。あなたは18歳以上ですか？（「{yes}」と答えてください）
+Hello, welcome to {server}. This is a adult server. Are you over 18? (Answer "yes" if so)"""
 
-cannot_understand = "<@{user}> そのリスポンスは理解できませんでした。「{yes}」か「{no}」と応えください"
+cannot_understand = "<@{user}> そのリスポンスは理解できませんでした。「{yes}」か「{no}」と応えください\nI do not understand that response. Please answer \"yes\" or \"no\""
 
 rank_not_found = "存在しないジャンルです。選べるジャンルは：{ranks}"
 add_rank_response = '<@{user}> が {rank} ジャンルに参加しました'
