@@ -192,9 +192,11 @@ def initialize(config):
                 if ans is True:
                     await bot.make_eligible(msg.author)
                     await bot.cleanup_after(msg, msg.author)
+                    bot.remove_from_vetting(msg.author)
                 elif ans is False:
                     await bot.cleanup_after(msg, msg.author)
                     await bot.kick(msg.author)
+                    bot.remove_from_vetting(msg.author)
                 else:
                     warn = await say('cannot_understand', yes=bot.yes_words[0], no=bot.no_words[0])
                     bot.append_msg_to_vetting(msg.author, warn)
