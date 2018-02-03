@@ -1,0 +1,7 @@
+greeting = """
+<@{user}> {server}にいらっしゃい
+ここは18禁なサーバーですので、こちらで年齢確認します。あなたは18歳以上ですか？（「はい」か「いいえ」と言ってください）"""
+
+rank_not_found = "存在しないジャンルです。選べるジャンルは：{ranks}"
+add_rank_response = '<@{user}> が {rank} ジャンルに参加しました'
+remove_rank_response = '<@{user}> が {rank} ジャンルから離脱しました'
