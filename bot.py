@@ -193,10 +193,10 @@ def initialize(config):
                     await bot.make_eligible(msg.author)
                     await bot.cleanup_after(msg, msg.author)
                 elif ans is False:
-                    await bot.kick(msg.author)
                     await bot.cleanup_after(msg, msg.author)
+                    await bot.kick(msg.author)
                 else:
-                    warn = await say('cannot_understand')
+                    warn = await say('cannot_understand', yes=bot.yes_words[0], no=bot.no_words[0])
                     bot.append_msg_to_vetting(msg.author, warn)
                     await bot.delete_message(msg)
         elif msg.channel == bot.subscription_channel:
