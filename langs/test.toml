@@ -2,7 +2,7 @@ greeting = """
 Hello, <@{user}>, welcome to {server}!
 Please answer: Are you woke? (anser {yes} if you are)"""
 
-cannot_understand = "Sorry, I don't understand that. Please reply with {yes} or {no}"
+cannot_understand = "<@{user}> Sorry, I don't understand that. Please reply with {yes} or {no}"
 
 rank_not_found = "That rank doesn't exist, available ranks are {ranks}"
 add_rank_response = '<@{user}>, You are added to {rank}'
