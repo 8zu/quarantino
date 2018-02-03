@@ -82,6 +82,9 @@ class Quarantino(commands.Bot):
         self.vetting_room = {}
         self.ranks = config['ranks']
 
+        self.yes_words = config['yes_words']
+        self.no_words = config['no_words']
+
         print("Initialization complete")
         self.initialized = True
         return True
@@ -96,11 +99,14 @@ class Quarantino(commands.Bot):
             None
 
     async def greet(self, member):
-        msg_text = self.texts['greeting'].format(user=member.id, server=self.server.name)
+        msg_text = self.texts['greeting'].format(user=member.id, server=self.server.name, yes=self.yes_words[0])
         return await self.send_message(self.application_channel, msg_text)
 
     def add_to_vetting(self, member, greet_msg):
-        self.vetting_room[member.id] = greet_msg
+        self.vetting_room[member.id] = [greet_msg]
+
+    def append_msg_to_vetting(self, member, msg):
+        self.vetting_room[member.id].append(msg)
 
     def remove_from_vetting(self, member):
         self.vetting_room.pop(member.id, None)
@@ -109,11 +115,15 @@ class Quarantino(commands.Bot):
         return member.id in self.vetting_room
 
     def process_answer(self, s):
-        # better logic
-        return s.strip() == 'yes'
+        s = s.strip()
+        if any(s.startswith(yes) for yes in self.yes_words):
+            return True
+        if any(s.startswith(no) for no in self.no_words):
+            return False
+        return None
 
     async def cleanup_after(self, reply, member):
-        await self.delete_messages([self.vetting_room[member.id], reply])
+        await self.delete_messages([reply, *self.vetting_room[member.id]])
 
     async def make_eligible(self, user):
         await self.add_roles(user, self.eligible_role)
@@ -171,20 +181,25 @@ def initialize(config):
         if not bot.initialized:
             return
 
+        async def say(msg_id, **kwargs):
+            return await bot.send_message(msg.channel, texts[msg_id].format(**kwargs))
+
         if msg.channel.is_private:
             pass
         elif msg.channel == bot.application_channel:
             if bot.is_vetting(msg.author):
-                if bot.process_answer(msg.content):
-                    print(f'reply \"{msg.content}\" passes the test')
+                ans = bot.process_answer(msg.content)
+                if ans is True:
                     await bot.make_eligible(msg.author)
                     await bot.cleanup_after(msg, msg.author)
+                elif ans is False:
+                    await bot.kick(msg.author)
+                    await bot.cleanup_after(msg, msg.author)
                 else:
-                    print(f'reply \"{msg.content}\" is not expected')
+                    warn = await say('cannot_understand')
+                    bot.append_msg_to_vetting(msg.author, warn)
+                    await bot.delete_message(msg)
         elif msg.channel == bot.subscription_channel:
-            async def say(msg_id, **kwargs):
-                await bot.send_message(msg.channel, texts[msg_id].format(**kwargs))
-
             if not bot.check_eligible(msg.author):
                 say('ineligible')
                 return

@@ -8,3 +8,7 @@ ranks = ["foo", "bar"]
 
 cache_root = 'cache/'
 text_path = 'langs/test.toml'
+
+# case-insensitive
+yes_words = ['yes']
+no_words = ['no']
