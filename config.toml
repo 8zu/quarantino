@@ -1,0 +1,10 @@
+token = ""
+
+application_channel = "botspam"
+eligible_role = "dummy"
+subscription_channel = "botspam2"
+
+ranks = ["foo", "bar"]
+
+cache_root = 'cache/'
+text_path = 'langs/test.toml'
