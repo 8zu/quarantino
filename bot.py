@@ -115,7 +115,7 @@ class Quarantino(commands.Bot):
         return member.id in self.vetting_room
 
     def process_answer(self, s):
-        s = s.strip()
+        s = s.strip().lower()
         if any(s.startswith(yes) for yes in self.yes_words):
             return True
         if any(s.startswith(no) for no in self.no_words):
