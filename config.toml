@@ -1,10 +1,10 @@
 token = ""
 
-application_channel = "botspam"
-eligible_role = "dummy"
-subscription_channel = "botspam2"
+application_channel = "application"
+eligible_role = "18"
+subscription_channel = "botspam"
 
-ranks = ["foo", "bar"]
+ranks = ["yuri", "ero"]
 
 cache_root = 'cache/'
 text_path = 'langs/kakuri.toml'
