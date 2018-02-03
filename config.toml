@@ -10,5 +10,5 @@ cache_root = 'cache/'
 text_path = 'langs/kakuri.toml'
 
 # case-insensitive
-yes_words = ['yes']
-no_words = ['no']
+yes_words = ['はい', 'yes', 'そうです']
+no_words = ['いいえ', 'no']
