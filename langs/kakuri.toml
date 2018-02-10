@@ -1,6 +1,7 @@
 greeting = """
 <@{user}> {server}にいらっしゃい
-ここは18禁なサーバーですので、こちらで年齢確認します。あなたは18歳以上ですか？（「{yes}」と答えてください）
+このサーバーは18歳以上のみが参加することが出来るサーバーです。このチャンネルではあなたが18歳以上かの確認を行います。
+あなたは18歳以上ですか？18歳以上ならば｢はい｣（または｢yes｣）、18歳未満であれば｢いいえ｣（または｢no｣）と書き込んでください。
 Hello, welcome to {server}. This is a adult server. Are you over 18? (Answer "yes" if so)"""
 
 cannot_understand = "<@{user}> そのリスポンスは理解できませんでした。「{yes}」か「{no}」と応えください\nI do not understand that response. Please answer \"yes\" or \"no\""
