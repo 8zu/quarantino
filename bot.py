@@ -206,7 +206,7 @@ def initialize(config):
                 say('ineligible')
                 return
             cmd = bot.parse_command(msg.content)
-            if not cmd.rank:
+            if not cmd or cmd.rank:
                 return
             if cmd.rank in bot.ranks:
                 if cmd.add:
